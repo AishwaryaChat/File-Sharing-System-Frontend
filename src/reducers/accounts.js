@@ -7,6 +7,8 @@ const INITIAL_STATE = {
   email: ''
 }
 
+export const getIsLoggedIn = state => state.accounts.isLoggedIn
+
 const accounts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case 'New':

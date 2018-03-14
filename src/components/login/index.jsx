@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
+import { Redirect } from 'react-router-dom'
 
 import logo from '../../logo.svg';
 import '../../App.css';
@@ -7,7 +9,15 @@ import '../../App.css';
 // actions
 import { startPostLogin } from '../../actions/login'
 
+// selectors
+import { getIsLoggedIn } from '../../reducers/accounts'
+
 class LoginComponent extends React.Component {
+
+  static propTypes = {
+    startLogin: PropTypes.func.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired
+  }
 
   handleClick = () => {
     const { startLogin } = this.props
@@ -17,6 +27,8 @@ class LoginComponent extends React.Component {
   }
 
   render () {
+    const { isLoggedIn } = this.props
+    if (isLoggedIn) return <Redirect to='/dashboard'/>
     return (
       <div className="App">
         <header className="App-header">
@@ -35,12 +47,16 @@ class LoginComponent extends React.Component {
   }
 }
 
+const mapStateToProps = state => ({
+  isLoggedIn: getIsLoggedIn(state)
+})
+
 const mapDispatchToProps = dispatch => ({
   startLogin (data) {
     dispatch(startPostLogin(data))
   }
 })
 
-const Login = connect(null, mapDispatchToProps)(LoginComponent)
+const Login = connect(mapStateToProps, mapDispatchToProps)(LoginComponent)
 
 export default Login
