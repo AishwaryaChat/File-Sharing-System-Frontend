@@ -12,7 +12,7 @@ const AppRouter = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path='/login' component={Login} />
+        <Route exact path='/' component={Login} />
       </Switch>
     </Router>
   </Provider>
