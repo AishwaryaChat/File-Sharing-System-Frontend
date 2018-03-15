@@ -8,6 +8,8 @@ const INITIAL_STATE = {
 }
 
 export const getIsLoggedIn = state => state.accounts.isLoggedIn
+export const getJwt = state => state.accounts.id
+export const getUserId = state => state.accounts.userId
 
 const accounts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
