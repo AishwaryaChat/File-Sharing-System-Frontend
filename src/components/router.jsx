@@ -7,6 +7,7 @@ import {
 import { Provider } from 'react-redux'
 
 import Login from './login'
+import Layout from './_base/layout'
 import Dashboard from './dashboard'
 import CreateOrganisation from './organisation/createOrganisation'
 import AddFile from './file/addFile'
@@ -16,9 +17,9 @@ const AppRouter = ({ store }) => (
     <Router>
       <Switch>
         <Route exact path='/' component={Login} />
-        <Route exact path='/dashboard' component={Dashboard} />
-        <Route exact path='/createorganisation' component={CreateOrganisation} />
-        <Route exact path='/addfile' component={AddFile} />
+        <Layout exact path='/dashboard' component={Dashboard} />
+        <Layout exact path='/createorganisation' component={CreateOrganisation} />
+        <Layout exact path='/addfile' component={AddFile} />
       </Switch>
     </Router>
   </Provider>
