@@ -8,11 +8,10 @@ import FileList from '../file/fileList'
 import { startFetchFiles } from '../../actions/file'
 
 // selectors
-import { getJwt, getUserId } from '../../reducers/accounts'
+import { getJwt } from '../../reducers/accounts'
 
 const mapStateToProps = state => ({
-  jwt: getJwt(state),
-  userId: getUserId(state)
+  jwt: getJwt(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -23,8 +22,8 @@ const mapDispatchToProps = dispatch => ({
 
 class DashboardComponent extends React.Component {
   componentDidMount () {
-    const { userId, jwt, fetchFiles } = this.props
-    fetchFiles({ userId, jwt })
+    const { jwt, fetchFiles } = this.props
+    fetchFiles({ jwt })
   }
 
   render () {

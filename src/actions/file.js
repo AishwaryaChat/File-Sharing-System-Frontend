@@ -17,7 +17,7 @@ const emitSetFiles = data => {
   }
 }
 
-const postFile = ({name, content, userId, jwt}) => {
+const postFile = ({name, content, jwt}) => {
   const url = process.env.REACT_APP_SERVER + '/api/files?access_token=' + jwt
   return fetch(url, {
     method: 'POST',
@@ -25,7 +25,7 @@ const postFile = ({name, content, userId, jwt}) => {
       Accept: 'application/json',
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ name, content, userId })
+    body: JSON.stringify({ name, content })
   })
 }
 
@@ -42,8 +42,8 @@ export const startPostFile = (data, cb) => dispatch => {
   })
 }
 
-const fetchFiles = ({ userId, jwt }) => {
-  const url = process.env.REACT_APP_SERVER + '/api/files/userId/' + userId + '/?access_token=' + jwt
+const fetchFiles = ({ jwt }) => {
+  const url = process.env.REACT_APP_SERVER + '/api/files/?access_token=' + jwt
   return fetch(url, {
     method: 'GET',
     headers: {

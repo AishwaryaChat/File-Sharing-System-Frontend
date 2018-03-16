@@ -27,8 +27,7 @@ export const startPostLogin = data => dispatch => {
     dispatch(
       emitLogin({
         email: data.email,
-        id: json.id,
-        userId: json.userId
+        id: json.id
       })
     )
   })

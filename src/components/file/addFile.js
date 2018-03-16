@@ -6,11 +6,10 @@ import { withRouter } from 'react-router-dom'
 import { startPostFile } from '../../actions/file'
 
 // selectors
-import { getJwt, getUserId } from '../../reducers/accounts'
+import { getJwt } from '../../reducers/accounts'
 
 const mapStateToProps = state => ({
-  jwt: getJwt(state),
-  userId: getUserId(state)
+  jwt: getJwt(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -23,8 +22,8 @@ class AddFileComponent extends React.Component {
   handleClick = () => {
     const name = this.refs.filename.value
     const content = this.refs.content.value
-    const { jwt, userId, postFile, history } = this.props
-    postFile({name, content, userId, jwt}, () => {
+    const { jwt, postFile, history } = this.props
+    postFile({name, content, jwt}, () => {
       history.push({
         pathname: '/dashboard'
       })
