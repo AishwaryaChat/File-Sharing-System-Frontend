@@ -1,8 +1,9 @@
-import { SET_FILES } from '../helpers/actions'
+import { SET_FILES, SET_ORGANISATION } from '../helpers/actions'
 
 const INITIAL_STATE = {
   byId: {},
-  allIds: []
+  allIds: [],
+  organisation: {}
 }
 
 // selectors
@@ -17,6 +18,10 @@ const file = (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         byId: action.byId,
         allIds: action.allIds
+      })
+    case SET_ORGANISATION:
+      return Object.assign({}, state, {
+        organisation: action.organisation
       })
     default:
       return state

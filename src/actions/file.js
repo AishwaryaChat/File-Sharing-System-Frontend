@@ -1,5 +1,5 @@
 import { checkStatus, parseJSON } from '../helpers/utils'
-import { SET_FILES } from '../helpers/actions'
+import { SET_FILES, SET_ORGANISATION } from '../helpers/actions'
 
 const emitSetFiles = data => {
   const byId = {}
@@ -17,6 +17,11 @@ const emitSetFiles = data => {
   }
 }
 
+const emitOrganisation = data => ({
+  type: SET_ORGANISATION,
+  organisation: data
+})
+
 const postFile = ({name, content, jwt}) => {
   const url = process.env.REACT_APP_SERVER + '/api/files?access_token=' + jwt
   return fetch(url, {
@@ -31,15 +36,15 @@ const postFile = ({name, content, jwt}) => {
 
 export const startPostFile = (data, cb) => dispatch => {
   return postFile(data)
-  .then(checkStatus)
-  .then(parseJSON)
-  .then(json => {
-    console.log('data inside post file', json)
-    cb()
-  })
-  .catch(err => {
-    console.error(err)
-  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside post file', json)
+      cb()
+    })
+    .catch(err => {
+      console.error(err)
+    })
 }
 
 const fetchFiles = ({ jwt }) => {
@@ -55,13 +60,39 @@ const fetchFiles = ({ jwt }) => {
 
 export const startFetchFiles = data => dispatch => {
   return fetchFiles(data)
-  .then(checkStatus)
-  .then(parseJSON)
-  .then(json => {
-    console.log('data inside fetch files', json)
-    dispatch(emitSetFiles(json))
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside fetch files', json)
+      dispatch(emitSetFiles(json))
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
+
+const postOrganisation = ({name, jwt}) => {
+  const url = process.env.REACT_APP_SERVER + '/api/organisations/?access_token=' + jwt
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name })
   })
-  .catch(err => {
-    console.error(err)
-  })
+}
+
+export const startPostOrganisation = (data, cb) => dispatch => {
+  return postOrganisation(data)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside create organisation', json)
+      dispatch(emitOrganisation(json))
+      cb()
+    })
+    .catch(err => {
+      console.error(err)
+    })
 }
