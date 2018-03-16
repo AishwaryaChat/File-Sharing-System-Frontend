@@ -1,5 +1,6 @@
 // accounts
 export const SET_LOGIN = 'SET_LOGIN'
+export const APP_LOGOUT = 'APP_LOGOUT'
 
 // files
 export const SET_FILES = 'SET_FILES'

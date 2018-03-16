@@ -1,4 +1,4 @@
-import { SET_FILES, SET_ORGANISATION } from '../helpers/actions'
+import { SET_FILES, SET_ORGANISATION, APP_LOGOUT } from '../helpers/actions'
 
 const INITIAL_STATE = {
   byId: {},
@@ -23,6 +23,8 @@ const file = (state = INITIAL_STATE, action) => {
       return Object.assign({}, state, {
         organisation: action.organisation
       })
+    case APP_LOGOUT:
+      return INITIAL_STATE
     default:
       return state
   }

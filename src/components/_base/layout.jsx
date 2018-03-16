@@ -27,7 +27,7 @@ const LayoutComponent = ({
 }) => {
   if (isLoggedIn) {
     return <Layout {...rest} component={Component} />
-  } else return <Redirect to='login' />
+  } else return <Redirect to='/' />
 }
 
 LayoutComponent.props = {

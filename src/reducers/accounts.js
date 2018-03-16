@@ -1,4 +1,4 @@
-import { SET_LOGIN } from '../helpers/actions'
+import { SET_LOGIN, APP_LOGOUT } from '../helpers/actions'
 
 const INITIAL_STATE = {
   isLoggedIn: false,
@@ -14,13 +14,14 @@ const accounts = (state = INITIAL_STATE, action) => {
     case 'New':
       return INITIAL_STATE
     case SET_LOGIN: {
-
       return Object.assign({}, state, {
         email: action.data.email,
         id: action.data.id,
         isLoggedIn: true
       })
     }
+    case APP_LOGOUT:
+      return INITIAL_STATE
     default:
       return state
   }
