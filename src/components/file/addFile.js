@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router-dom'
 
 // actions
 import { startPostFile } from '../../actions/file'
@@ -13,8 +14,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  postFile (data) {
-    dispatch(startPostFile(data))
+  postFile (data, cb) {
+    dispatch(startPostFile(data, cb ))
   }
 })
 
@@ -22,8 +23,12 @@ class AddFileComponent extends React.Component {
   handleClick = () => {
     const name = this.refs.filename.value
     const content = this.refs.content.value
-    const { jwt, userId, postFile } = this.props
-    postFile({name, content, userId, jwt})
+    const { jwt, userId, postFile, history } = this.props
+    postFile({name, content, userId, jwt}, () => {
+      history.push({
+        pathname: '/dashboard'
+      })
+    })
   }
 
   render () {
@@ -47,6 +52,6 @@ class AddFileComponent extends React.Component {
 
 
 
-const AddFile = connect(mapStateToProps, mapDispatchToProps)(AddFileComponent)
+const AddFile = withRouter(connect(mapStateToProps, mapDispatchToProps)(AddFileComponent))
 
 export default AddFile

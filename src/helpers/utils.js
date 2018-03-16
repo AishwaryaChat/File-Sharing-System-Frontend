@@ -24,5 +24,3 @@ export const parseJSON = response => response.json()
 export const removeTrailingSlash = string => {
   return string.replace(/\/$/, '')
 }
-
-export const composeAuth = jwt => 'Bearer ' + jwt

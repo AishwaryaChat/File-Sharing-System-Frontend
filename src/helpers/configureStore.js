@@ -19,7 +19,8 @@ const configureStore = () => {
   store.subscribe(
     throttle(() => {
       saveState({
-        accounts: store.getState().accounts
+        accounts: store.getState().accounts,
+        file: store.getState().file
       })
     }, 1000)
   )
