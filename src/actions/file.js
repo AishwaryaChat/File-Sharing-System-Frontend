@@ -1,5 +1,5 @@
 import { checkStatus, parseJSON } from '../helpers/utils'
-import { SET_FILES, SET_ORGANISATION } from '../helpers/actions'
+import { SET_FILES, SET_ORGANISATION, SET_FILE } from '../helpers/actions'
 
 const emitSetFiles = data => {
   const byId = {}
@@ -17,9 +17,14 @@ const emitSetFiles = data => {
   }
 }
 
-const emitOrganisation = data => ({
+const emitOrganisation = (data) => ({
   type: SET_ORGANISATION,
   organisation: data
+})
+
+export const emitFile = id => ({
+  type: SET_FILE,
+  id
 })
 
 const postFile = ({name, content, jwt}) => {
@@ -60,6 +65,30 @@ const fetchFiles = ({ jwt }) => {
 
 export const startFetchFiles = data => dispatch => {
   return fetchFiles(data)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside fetch files', json)
+      dispatch(emitSetFiles(json))
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
+
+const fetchFile = ({id, jwt}) => {
+  const url = process.env.REACT_APP_SERVER + '/api/files/file?access_token=' + jwt
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
+export const startFetchFile = data => dispatch => {
+  return fetchFile(data)
     .then(checkStatus)
     .then(parseJSON)
     .then(json => {

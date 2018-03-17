@@ -12,6 +12,7 @@ import Dashboard from './dashboard'
 import Organisation from './organisation'
 import CreateOrganisation from './organisation/createOrganisation'
 import AddFile from './file/addFile'
+import ShowFile from './file/showFile'
 
 const AppRouter = ({ store }) => (
   <Provider store={store}>
@@ -22,6 +23,7 @@ const AppRouter = ({ store }) => (
         <Layout exact path='/organisation' component={Organisation} />
         <Layout exact path='/createorganisation' component={CreateOrganisation} />
         <Layout exact path='/addfile' component={AddFile} />
+        <Layout exact path='/showfile' component={ShowFile} />
       </Switch>
     </Router>
   </Provider>

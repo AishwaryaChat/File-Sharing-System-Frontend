@@ -1,15 +1,17 @@
-import { SET_FILES, SET_ORGANISATION, APP_LOGOUT } from '../helpers/actions'
+import { SET_FILES, SET_ORGANISATION, APP_LOGOUT, SET_FILE } from '../helpers/actions'
 
 const INITIAL_STATE = {
   byId: {},
   allIds: [],
-  organisation: {}
+  organisation: {},
+  activeFile: ''
 }
 
 // selectors
 export const getById = state => state.file.byId
 export const getAllIds = state => state.file.allIds
 export const getOrganisation = state => state.file.organisation
+export const getActiveFile = state => state.file.activeFile
 
 const file = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -23,6 +25,10 @@ const file = (state = INITIAL_STATE, action) => {
     case SET_ORGANISATION:
       return Object.assign({}, state, {
         organisation: action.organisation
+      })
+    case SET_FILE:
+      return Object.assign({}, state, {
+        activeFile: action.id
       })
     case APP_LOGOUT:
       return INITIAL_STATE
