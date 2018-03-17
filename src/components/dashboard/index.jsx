@@ -31,9 +31,6 @@ class DashboardComponent extends React.Component {
       <div>
         <h3>Dashboard Component</h3>
         <div>
-          <Link to='/createorganisation'>Create Organisation</Link>
-        </div>
-        <div>
           <Link to='/addfile'>Create File</Link>
         </div>
         <div>

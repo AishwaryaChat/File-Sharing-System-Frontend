@@ -96,3 +96,27 @@ export const startPostOrganisation = (data, cb) => dispatch => {
       console.error(err)
     })
 }
+
+const fetchOrganisation = ({jwt}) => {
+  const url = process.env.REACT_APP_SERVER + '/api/organisations/?access_token=' + jwt
+  return fetch(url, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    }
+  })
+}
+
+export const startFetchOrganisation = (data) => dispatch => {
+  return fetchOrganisation(data)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside fetch organisation', json)
+      dispatch(emitOrganisation(json))
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}

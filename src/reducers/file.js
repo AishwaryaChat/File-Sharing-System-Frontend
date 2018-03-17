@@ -9,6 +9,7 @@ const INITIAL_STATE = {
 // selectors
 export const getById = state => state.file.byId
 export const getAllIds = state => state.file.allIds
+export const getOrganisation = state => state.file.organisation
 
 const file = (state = INITIAL_STATE, action) => {
   switch (action.type) {
