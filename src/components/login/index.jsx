@@ -3,9 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Redirect } from 'react-router-dom'
 
-import logo from '../../logo.svg';
-import '../../App.css';
-
 // actions
 import { startPostLogin } from '../../actions/login'
 
