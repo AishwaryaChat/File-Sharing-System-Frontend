@@ -6,6 +6,8 @@ import AppRouter from './components/router.jsx'
 import registerServiceWorker from './registerServiceWorker'
 import configureStore from './helpers/configureStore'
 
+import 'bootstrap/dist/css/bootstrap.css'
+
 const store = configureStore()
 
 ReactDOM.render(<AppRouter store={store} />, document.getElementById('root'))

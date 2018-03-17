@@ -28,7 +28,7 @@ class DashboardComponent extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className='container'>
         <h3>Dashboard Component</h3>
         <div>
           <Link to='/addfile'>Create File</Link>

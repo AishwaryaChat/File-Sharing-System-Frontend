@@ -32,7 +32,7 @@ class HeaderComponent extends React.Component {
                   <Link to="/invitations">Invitations</Link>
                 </li>
                 <li>
-                  <button onClick={this.handleClick}>Logout</button>
+                  <button type='button' className='btn btn-primary' onClick={this.handleClick}>Logout</button>
                 </li>
               </ul>
             </nav>
