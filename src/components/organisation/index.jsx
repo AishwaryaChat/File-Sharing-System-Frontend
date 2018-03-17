@@ -27,12 +27,28 @@ class OrganisationComponent extends React.Component {
   }
 
   render () {
+    const { organisation } = this.props
     return (
       <div>
-        <h3>Organisation Component</h3>
-        <div>
-          <Link to='/createorganisation'>Create Organisation</Link>
-        </div>
+        {Object.keys(organisation).length !== 0
+          ? (
+            <div>
+              <h3>My Organisation</h3>
+              <h5>Name: <span>{organisation.name}</span></h5>
+              <div>
+                <h5>Add Members</h5>
+                <input type="text" placeholder="type email id"/>
+                <div>
+                  <button>Add</button>
+                </div>
+              </div>
+            </div>
+          )
+          : (
+            <div>
+              <Link to='/createorganisation'>Create Organisation</Link>
+            </div>
+          )}
       </div>
     )
   }
