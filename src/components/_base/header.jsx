@@ -11,18 +11,13 @@ import { getJwt } from '../../reducers/accounts'
 
 export const Header = () => (
   <header>
-    <div className="">
-      <nav className="navbar">
-        <ul className="nav navbar-nav">
-          <li>
-            <Link to="/">Login</Link>
-          </li>
-          <li>
-            <Link to="/register">Register</Link>
-          </li>
-        </ul>
-      </nav>
-    </div>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div className="navbar-brand">File Sharing System</div>
+      <ul className="navbar-nav ml-auto">
+        <li><Link to='/' className="nav-item nav-link">Login</Link></li>
+        <li><Link to='/register' className="nav-item nav-link">Register</Link></li>
+      </ul>
+    </nav>
   </header>
 )
 
@@ -35,26 +30,23 @@ class PrivateHeaderComponent extends React.Component {
   render () {
     return (
       <header>
-        <div className="">
-          <div className="">
-            <nav className="navbar">
-              <ul className="nav navbar-nav">
-                <li>
-                  <Link to="/dashboard">DashBoard</Link>
-                </li>
-                <li>
-                  <Link to="/organisation">Organisation</Link>
-                </li>
-                <li>
-                  <Link to="/invitations">Invitations</Link>
-                </li>
-                <li>
-                  <button type='button' className='btn btn-primary' onClick={this.handleClick}>Logout</button>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+          <div className="navbar-brand">File Sharing System</div>
+          <ul className="navbar-nav ml-auto">
+            <li>
+              <Link to="/dashboard" className="nav-item nav-link">DashBoard</Link>
+            </li>
+            <li>
+              <Link to="/organisation" className="nav-item nav-link">Organisation</Link>
+            </li>
+            <li>
+              <Link to="/invitations" className="nav-item nav-link">Invitations</Link>
+            </li>
+            <li>
+              <button type='button' className="nav-item nav-link btn btn-primary" onClick={this.handleClick}>Logout</button>
+            </li>
+          </ul>
+        </nav>
       </header>
       )
     }
