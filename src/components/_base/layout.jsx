@@ -11,11 +11,9 @@ export const Layout = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={matchProps => (
-        <div className=''>
-          <div className=''>
-            <Header />
-            <Component {...matchProps} />
-          </div>
+        <div className='bg-color'>
+          <Header />
+          <Component {...matchProps} />
         </div>
       )}
     />
@@ -27,7 +25,7 @@ export const Private = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={matchProps => (
-        <div>
+        <div className='bg-color'>
           <PrivateHeader />
           <Component {...matchProps} />
         </div>

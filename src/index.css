@@ -2,4 +2,29 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: black;
+}
+
+.bg-color {
+  background-color: #E4DCDB;
+  height: 100vh;
+}
+
+.vertical-center {
+  padding: 100px;
+}
+
+.form-group {
+  margin-top: 10%;
+}
+
+.login-border {
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.hc-button {
+  margin-left: 43%;
+  margin-top: 25px;
 }
