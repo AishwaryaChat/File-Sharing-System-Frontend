@@ -20,7 +20,6 @@ const mapDispatchToProps = dispatch => ({
 
 class ViewFileComponent extends React.Component {
   componentWillUnmount () {
-    console.log('inside')
     const { setFile } = this.props
     setFile('')
   }

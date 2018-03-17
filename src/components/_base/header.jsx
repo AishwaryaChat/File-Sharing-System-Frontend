@@ -40,9 +40,6 @@ class PrivateHeaderComponent extends React.Component {
               <Link to="/organisation" className="nav-item nav-link">Organisation</Link>
             </li>
             <li>
-              <Link to="/invitations" className="nav-item nav-link">Invitations</Link>
-            </li>
-            <li>
               <button type='button' className="nav-item nav-link btn btn-primary" onClick={this.handleClick}>Logout</button>
             </li>
           </ul>

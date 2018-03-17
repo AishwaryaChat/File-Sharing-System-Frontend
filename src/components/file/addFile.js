@@ -32,17 +32,24 @@ class AddFileComponent extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>
-          <label htmlFor='filename'>Filename</label>
-          <input id='filename' type='text' ref="filename"/>
-        </div>
-        <div>
-          <label htmlFor='content'>File Content</label>
-          <textarea rows='10' cols='50' name='content' ref="content" placeholder='Type your content here' />
-        </div>
-        <div>
-          <button onClick={this.handleClick}>Save File</button>
+      <div className='vertical-center-createfile'>
+        <div className="row">
+          <div className='col-sm-8 offset-sm-2'>
+            <div className="login-border">
+              <h2>Create New File</h2>
+              <div className="form-group form-group-createfile">
+                <label htmlFor='filename'>Filename</label>
+                <input className="form-control" id='filename' type='text' ref="filename" placeholder='Type filename' />
+              </div>
+              <div className="form-group form-group-createfile">
+                <label htmlFor='content'>File Content</label>
+                <textarea className="form-control" rows='10' cols='50' name='content' ref="content" placeholder='Type file content here' />
+              </div>
+              <div className="form-group form-group-createfile">
+                <button className="btn btn-primary hc-button" onClick={this.handleClick}>Save File</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

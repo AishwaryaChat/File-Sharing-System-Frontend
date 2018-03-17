@@ -28,13 +28,17 @@ class DashboardComponent extends React.Component {
 
   render () {
     return (
-      <div className='container'>
-        <h3>Dashboard Component</h3>
-        <div>
-          <Link to='/addfile'>Create File</Link>
+      <div className='col-sm-10 offset-sm-1 dashboard-wrapper'>
+        <div className='row'>
+          <div className='col-sm-6'>
+            <h3>Dashboard</h3>
+          </div>
+          <div className='col-sm-2 offset-sm-4'>
+            <Link className='btn btn-dark' to='/addfile'>Create File</Link>
+          </div>
         </div>
-        <div>
-          <h3>My files</h3>
+        <div className='card'>
+          <span className='card-header'><h4>My files</h4></span>
           <FileList />
         </div>
       </div>

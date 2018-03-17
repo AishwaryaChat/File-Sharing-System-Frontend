@@ -35,7 +35,7 @@ class LoginComponent extends React.Component {
           <div className='col-sm-4 offset-sm-4'>
             <div className="login-border">
               <h2>Login</h2>
-              <div  className="form-group">
+              <div className="form-group">
                 <label htmlFor="inputEmail1">Email address</label>
                 <input className="form-control" type="email" ref="email" aria-describedby="emailHelp" id="inputEmail1"/>
               </div>

@@ -38,9 +38,17 @@ class FileListComponent extends React.Component {
   render () {
     const { filesById, filesAllIds } = this.props
     return (
-      <div>
+      <div className='card-body'>
         {filesAllIds.map((id, index) => (
-            <li onClick={this.handleClick} id={id} key={index}>Filename: {filesById[id].name}</li>
+          <div className='row card-header' key={index}>
+            <div className='col-sm-7 card-text' onClick={this.handleClick} id={id}>{filesById[id].name}</div>
+            <div className='col-sm-2'>
+              <button className='btn btn-info'>Get Link</button>
+            </div>
+            <div className='col-sm-2'>
+              <button className='btn btn-info'>Add to Organisation</button>
+            </div>
+          </div>
         ))}
       </div>
     )
