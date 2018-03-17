@@ -31,6 +31,10 @@ class LoginComponent extends React.Component {
     if (isLoggedIn) return <Redirect to='/dashboard'/>
     return (
       <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <h1 className="App-title">Welcome to File-sharing-system</h1>
+        </header>
         <div className="App-intro">
           <div>
             <input type="email" ref="email"/>

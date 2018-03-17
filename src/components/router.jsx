@@ -7,7 +7,7 @@ import {
 import { Provider } from 'react-redux'
 
 import Login from './login'
-import Layout from './_base/layout'
+import { Layout, PrivateLayout } from './_base/layout'
 import Dashboard from './dashboard'
 import Organisation from './organisation'
 import CreateOrganisation from './organisation/createOrganisation'
@@ -18,12 +18,13 @@ const AppRouter = ({ store }) => (
   <Provider store={store}>
     <Router>
       <Switch>
-        <Route exact path='/' component={Login} />
-        <Layout exact path='/dashboard' component={Dashboard} />
-        <Layout exact path='/organisation' component={Organisation} />
-        <Layout exact path='/createorganisation' component={CreateOrganisation} />
-        <Layout exact path='/addfile' component={AddFile} />
-        <Layout exact path='/showfile' component={ShowFile} />
+        <Layout exact path='/' component={Login} />
+        <Layout exact path='/register' component={Login} />
+        <PrivateLayout exact path='/dashboard' component={Dashboard} />
+        <PrivateLayout exact path='/organisation' component={Organisation} />
+        <PrivateLayout exact path='/createorganisation' component={CreateOrganisation} />
+        <PrivateLayout exact path='/addfile' component={AddFile} />
+        <PrivateLayout exact path='/showfile' component={ShowFile} />
       </Switch>
     </Router>
   </Provider>

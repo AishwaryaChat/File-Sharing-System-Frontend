@@ -3,7 +3,7 @@ import { Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Header } from './header'
+import { PrivateHeader, Header } from './header'
 import { getIsLoggedIn } from '../../reducers/accounts'
 
 export const Layout = ({ component: Component, ...rest }) => {
@@ -11,8 +11,24 @@ export const Layout = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={matchProps => (
+        <div className=''>
+          <div className=''>
+            <Header />
+            <Component {...matchProps} />
+          </div>
+        </div>
+      )}
+    />
+  )
+}
+
+export const Private = ({ component: Component, ...rest }) => {
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
         <div>
-          <Header />
+          <PrivateHeader />
           <Component {...matchProps} />
         </div>
       )}
@@ -20,17 +36,17 @@ export const Layout = ({ component: Component, ...rest }) => {
   )
 }
 
-const LayoutComponent = ({
+const PrivateLayoutComponent = ({
   component: Component,
   isLoggedIn,
   ...rest
 }) => {
   if (isLoggedIn) {
-    return <Layout {...rest} component={Component} />
+    return <Private {...rest} component={Component} />
   } else return <Redirect to='/' />
 }
 
-LayoutComponent.props = {
+PrivateLayoutComponent.props = {
   isLoggedIn: PropTypes.bool.isRequired
 }
 
@@ -38,6 +54,4 @@ const mapStateToProps = state => ({
   isLoggedIn: getIsLoggedIn(state)
 })
 
-const PrivateLayout = connect(mapStateToProps)(LayoutComponent)
-
-export default PrivateLayout
+export const PrivateLayout = connect(mapStateToProps)(PrivateLayoutComponent)

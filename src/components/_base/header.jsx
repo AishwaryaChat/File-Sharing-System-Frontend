@@ -9,7 +9,24 @@ import { startLogout } from '../../actions/login'
 // selectores
 import { getJwt } from '../../reducers/accounts'
 
-class HeaderComponent extends React.Component {
+export const Header = () => (
+  <header>
+    <div className="">
+      <nav className="navbar">
+        <ul className="nav navbar-nav">
+          <li>
+            <Link to="/">Login</Link>
+          </li>
+          <li>
+            <Link to="/register">Register</Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+)
+
+class PrivateHeaderComponent extends React.Component {
   handleClick = () => {
       const { logout, jwt } = this.props
       logout({ jwt })
@@ -43,7 +60,7 @@ class HeaderComponent extends React.Component {
     }
 }
 
-HeaderComponent.props = {
+PrivateHeaderComponent.props = {
   logout: PropTypes.func.isRequired,
   jwt: PropTypes.string.isRequired
 }
@@ -58,6 +75,6 @@ const mapDispatchToProps = dispatch => ({
   }
 })
 
-export const Header = connect(mapStateToProps, mapDispatchToProps)(
-  HeaderComponent
+export const PrivateHeader = connect(mapStateToProps, mapDispatchToProps)(
+  PrivateHeaderComponent
 )
