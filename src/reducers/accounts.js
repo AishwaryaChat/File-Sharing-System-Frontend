@@ -1,15 +1,17 @@
-import { SET_LOGIN, APP_LOGOUT } from '../helpers/actions'
+import { SET_LOGIN, APP_LOGOUT, SET_REGISTERED } from '../helpers/actions'
 
 const INITIAL_STATE = {
   isLoggedIn: false,
   id: '',
   email: '',
-  userId: ''
+  userId: '',
+  isRegistered: false
 }
 
 export const getIsLoggedIn = state => state.accounts.isLoggedIn
 export const getJwt = state => state.accounts.id
 export const getUserId = state => state.accounts.userId
+export const getIsRegistered = state => state.accounts.isRegistered
 
 const accounts = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -20,9 +22,12 @@ const accounts = (state = INITIAL_STATE, action) => {
         email: action.data.email,
         id: action.data.id,
         userId: action.data.userId,
-        isLoggedIn: true
+        isLoggedIn: true,
+        isRegistered: false
       })
     }
+    case SET_REGISTERED:
+      return Object.assign({}, state, {isRegistered: true})
     case APP_LOGOUT:
       return INITIAL_STATE
     default:

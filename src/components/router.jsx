@@ -7,6 +7,7 @@ import {
 import { Provider } from 'react-redux'
 
 import Login from './login'
+import Register from './login/register'
 import { Layout, PrivateLayout } from './_base/layout'
 import Dashboard from './dashboard'
 import Organisation from './organisation'
@@ -20,7 +21,7 @@ const AppRouter = ({ store }) => (
     <Router>
       <Switch>
         <Layout exact path='/' component={Login} />
-        <Layout exact path='/register' component={Login} />
+        <Layout exact path='/register' component={Register} />
         <PrivateLayout exact path='/dashboard' component={Dashboard} />
         <PrivateLayout exact path='/organisation' component={Organisation} />
         <PrivateLayout exact path='/createorganisation' component={CreateOrganisation} />

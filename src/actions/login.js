@@ -1,5 +1,5 @@
 import { checkStatus, parseJSON } from '../helpers/utils'
-import { SET_LOGIN, APP_LOGOUT } from '../helpers/actions'
+import { SET_LOGIN, APP_LOGOUT, SET_REGISTERED } from '../helpers/actions'
 
 const emitLogin = data => ({
   type: SET_LOGIN,
@@ -8,6 +8,10 @@ const emitLogin = data => ({
 
 export const emitLogout = () => ({
   type: APP_LOGOUT
+})
+
+const emitRegistered = () => ({
+  type: SET_REGISTERED
 })
 
 const postLogin = ({email, password}) => {
@@ -60,6 +64,31 @@ export const startLogout = data => dispatch => {
     .then(json => {
       console.log('data inside logout', json)
       dispatch(emitLogout())
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
+
+const postRegister = ({email, password}) => {
+  const url = process.env.REACT_APP_SERVER + '/api/Users'
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ email, password })
+  })
+}
+
+export const startPostRegister = data => dispatch => {
+  return postRegister(data)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside register', json)
+      dispatch(emitRegistered())
     })
     .catch(err => {
       console.error(err)
