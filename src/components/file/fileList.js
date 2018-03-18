@@ -35,8 +35,14 @@ class FileListComponent extends React.Component {
     setFile(e.target.id)
   }
 
+  getDisable = () => {
+    const { organisation } = this.props
+    if (Object.keys(organisation).length === 0) return true
+    return false
+  }
+
   render () {
-    const { filesById, filesAllIds } = this.props
+    const { filesById, filesAllIds, organisation } = this.props
     return (
       <div className='card-body'>
         {filesAllIds.map((id, index) => (
@@ -46,7 +52,12 @@ class FileListComponent extends React.Component {
               <button className='btn btn-info'>Get Link</button>
             </div>
             <div className='col-sm-2'>
-              <button className='btn btn-info'>Add to Organisation</button>
+              <button
+                className='btn btn-info'
+                disabled={this.getDisable()}
+                >
+                  Add to Organisation
+                </button>
             </div>
           </div>
         ))}

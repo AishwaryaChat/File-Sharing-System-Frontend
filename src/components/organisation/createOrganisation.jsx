@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 
 // ations
-import { startPostOrganisation } from '../../actions/file'
+import { startPostOrganisation } from '../../actions/organisation'
 
 // selectors
 import { getJwt } from '../../reducers/accounts'
@@ -37,14 +37,20 @@ class CreateOrganisationComponent extends React.Component {
 
   render () {
     return (
-      <div>
-        <h3>Create New Organisation</h3>
-        <div>
-          <label htmlFor='name'>Organisation Name</label>
-          <input id='name' type='text' ref='name'/>
-        </div>
-        <div>
-          <button onClick={this.handleClick}>Create Organisation</button>
+      <div className='vertical-center'>
+        <div className="row">
+          <div className='col-sm-8 offset-sm-2'>
+            <div>
+              <h2>Create New Organisation</h2>
+              <div className="form-group form-group-createfile">
+                <label htmlFor='name'>Organisation Name</label>
+                <input className="form-control" id='name' type='text' ref='name'/>
+              </div>
+              <div className="form-group form-group-createfile">
+                <button className="btn btn-primary" onClick={this.handleClick}>Create Organisation</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

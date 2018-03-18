@@ -20,7 +20,8 @@ const configureStore = () => {
     throttle(() => {
       saveState({
         accounts: store.getState().accounts,
-        file: store.getState().file
+        file: store.getState().file,
+        organisation: store.getState().organisation
       })
     }, 1000)
   )

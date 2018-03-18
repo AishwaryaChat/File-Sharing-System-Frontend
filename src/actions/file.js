@@ -1,5 +1,5 @@
 import { checkStatus, parseJSON } from '../helpers/utils'
-import { SET_FILES, SET_ORGANISATION, SET_FILE } from '../helpers/actions'
+import { SET_FILES, SET_FILE } from '../helpers/actions'
 
 const emitSetFiles = data => {
   const byId = {}
@@ -16,11 +16,6 @@ const emitSetFiles = data => {
     allIds
   }
 }
-
-const emitOrganisation = (data) => ({
-  type: SET_ORGANISATION,
-  organisation: data
-})
 
 export const emitFile = id => ({
   type: SET_FILE,
@@ -94,56 +89,6 @@ export const startFetchFile = data => dispatch => {
     .then(json => {
       console.log('data inside fetch files', json)
       dispatch(emitSetFiles(json))
-    })
-    .catch(err => {
-      console.error(err)
-    })
-}
-
-const postOrganisation = ({name, jwt}) => {
-  const url = process.env.REACT_APP_SERVER + '/api/organisations/?access_token=' + jwt
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ name })
-  })
-}
-
-export const startPostOrganisation = (data, cb) => dispatch => {
-  return postOrganisation(data)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(json => {
-      console.log('data inside create organisation', json)
-      dispatch(emitOrganisation(json))
-      cb()
-    })
-    .catch(err => {
-      console.error(err)
-    })
-}
-
-const fetchOrganisation = ({jwt}) => {
-  const url = process.env.REACT_APP_SERVER + '/api/organisations/?access_token=' + jwt
-  return fetch(url, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json'
-    }
-  })
-}
-
-export const startFetchOrganisation = (data) => dispatch => {
-  return fetchOrganisation(data)
-    .then(checkStatus)
-    .then(parseJSON)
-    .then(json => {
-      console.log('data inside fetch organisation', json)
-      dispatch(emitOrganisation(json))
     })
     .catch(err => {
       console.error(err)

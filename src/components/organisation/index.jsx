@@ -2,11 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-// actions
-import { startFetchOrganisation } from '../../actions/file'
-
 // seletors
-import { getOrganisation } from '../../reducers/file'
+import { getOrganisation } from '../../reducers/organisation'
 import { getJwt } from '../../reducers/accounts'
 
 const mapStateToProps = state => ({
@@ -14,27 +11,20 @@ const mapStateToProps = state => ({
   jwt: getJwt(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-  fetchOrganisation (data) {
-    dispatch(startFetchOrganisation(data))
-  }
-})
-
 class OrganisationComponent extends React.Component {
-  componentDidMount () {
-    const { fetchOrganisation, jwt } = this.props
-    fetchOrganisation({ jwt })
-  }
 
   render () {
     const { organisation } = this.props
     return (
       <div>
-        <nav class="nav justify-content-center navbar-light bg-light">
-          <Link to='/organisation' class="nav-link">My Organisation</Link>
-          <div class="nav-link" href="#">|</div>
-          <Link to='/organisation' class="nav-link">Shared Organisations</Link>
+        <nav className="nav justify-content-center navbar-light bg-light">
+          <Link to='/organisation' className="nav-link">My Organisation</Link>
+          <div className="nav-link">|</div>
+          <Link to='/organisation' className="nav-link">Shared Organisations</Link>
         </nav>
+        <div>
+          <Link to='/createorganisation'>Create Organisation</Link>
+        </div>
         {/* {Object.keys(organisation).length !== 0
           ? (
             <div>
@@ -55,6 +45,6 @@ class OrganisationComponent extends React.Component {
   }
 }
 
-const Organisation = connect(mapStateToProps, mapDispatchToProps)(OrganisationComponent)
+const Organisation = connect(mapStateToProps)(OrganisationComponent)
 
 export default Organisation

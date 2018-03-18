@@ -6,27 +6,35 @@ import FileList from '../file/fileList'
 
 // actions
 import { startFetchFiles } from '../../actions/file'
+import { startFetchOrganisation } from '../../actions/organisation'
 
 // selectors
 import { getJwt } from '../../reducers/accounts'
+import { getOrganisation } from '../../reducers/organisation'
 
 const mapStateToProps = state => ({
-  jwt: getJwt(state)
+  jwt: getJwt(state),
+  organisation: getOrganisation(state)
 })
 
 const mapDispatchToProps = dispatch => ({
   fetchFiles (data) {
     dispatch(startFetchFiles(data))
+  },
+  fetchOrganisation (data) {
+    dispatch(startFetchOrganisation(data))
   }
 })
 
 class DashboardComponent extends React.Component {
   componentDidMount () {
-    const { jwt, fetchFiles } = this.props
+    const { jwt, fetchFiles, fetchOrganisation } = this.props
     fetchFiles({ jwt })
+    fetchOrganisation({ jwt })
   }
 
   render () {
+    const { organisation } = this.props
     return (
       <div className='col-sm-10 offset-sm-1 dashboard-wrapper'>
         <div className='row'>
@@ -39,7 +47,9 @@ class DashboardComponent extends React.Component {
         </div>
         <div className='card'>
           <span className='card-header'><h4>My files</h4></span>
-          <FileList />
+          <FileList
+            organisation={organisation}
+          />
         </div>
       </div>
     )
