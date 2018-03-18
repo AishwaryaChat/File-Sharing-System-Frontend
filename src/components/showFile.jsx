@@ -5,30 +5,53 @@ import { connect } from 'react-redux'
 import { getFile } from '../reducers/publicReducer'
 
 // actions
-import { startFetchPublicFile } from '../actions/publicAction'
+import { startFetchPublicFile, startPatchPublicFile, emitFile } from '../actions/publicAction'
 
 const mapStateToProps = state => ({
   activeFile: getFile(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  // setFile (data) {
-  //   dispatch(emitFile(data))
-  // },
+  setFile (data) {
+    dispatch(emitFile(data))
+  },
   fetchFile (data) {
     dispatch(startFetchPublicFile(data))
+  },
+  patchPublicFile (data) {
+    dispatch(startPatchPublicFile(data))
   }
 })
 
 class ViewFileComponent extends React.Component {
-  // componentWillUnmount () {
-  //   const { setFile } = this.props
-  //   setFile('')
-  // }
+  constructor (props) {
+    super(props)
+    this.state = {
+      name: this.props.activeFile.name,
+      content: this.props.activeFile.content
+    }
+  }
+
+  componentWillUnmount () {
+    const { setFile } = this.props
+    setFile({})
+  }
+
   componentDidMount () {
     const { fetchFile } = this.props
     const { userId, fileId } = this.props.match.params
     fetchFile({ fileId, userId })
+  }
+
+  handleChange = e => {
+    this.setState({[e.target.id]: e.target.value})
+  }
+
+  handleClick = () => {
+    const { userId, fileId } = this.props.match.params
+    const { patchPublicFile } = this.props
+    const { name, content } = this.state
+    patchPublicFile({fileId, name, content, userId})
   }
 
   render () {
@@ -45,14 +68,14 @@ class ViewFileComponent extends React.Component {
                       <h5>Read/Write</h5>
                       <div className="form-group form-group-createfile">
                         <label htmlFor='filename'>Filename</label>
-                        <input className="form-control" id='filename' type='text' ref="filename" placeholder='Type filename' value={activeFile.name}/>
+                        <input className="form-control" id='name' type='text' onChange={this.handleChange} placeholder='Type filename' value={this.state.name}/>
                       </div>
                       <div className="form-group form-group-createfile">
                         <label htmlFor='content'>File Content</label>
-                        <textarea className="form-control" rows='10' cols='50' name='content' ref="content" placeholder='Type file content here'>{activeFile.content}</textarea>
+                        <textarea className="form-control" rows='10' cols='50' id='content' onChange={this.handleChange} placeholder='Type file content here' defaultValue={this.state.content} />
                       </div>
                       <div className="form-group form-group-createfile">
-                        <button className="btn btn-primary hc-button">Edit File</button>
+                        <button className="btn btn-primary hc-button" onClick={this.handleClick}>Edit File</button>
                       </div>
                     </div>
                   </div>
