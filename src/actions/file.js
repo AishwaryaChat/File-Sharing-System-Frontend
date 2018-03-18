@@ -94,3 +94,28 @@ export const startFetchFile = data => dispatch => {
       console.error(err)
     })
 }
+
+const patchFile = ({id, name, content, jwt}) => {
+  const url = process.env.REACT_APP_SERVER + '/api/files/' + id + '/?access_token=' + jwt
+  return fetch(url, {
+    method: 'PATCH',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, content })
+  })
+}
+
+export const startPatchFile = (data, cb) => dispatch => {
+  return patchFile(data)
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside patch file', json)
+      cb()
+    })
+    .catch(err => {
+      console.error(err)
+    })
+}
