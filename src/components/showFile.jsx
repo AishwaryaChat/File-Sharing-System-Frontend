@@ -32,6 +32,16 @@ class ViewFileComponent extends React.Component {
     }
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.activeFile.name !== this.props.activeFile.name) {
+      this.setState({name: nextProps.activeFile.name})
+    }
+
+    if (nextProps.activeFile.content !== this.props.activeFile.content) {
+      this.setState({content: nextProps.activeFile.content})
+    }
+  }
+
   componentWillUnmount () {
     const { setFile } = this.props
     setFile({})

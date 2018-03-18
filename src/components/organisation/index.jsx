@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 // seletors
 import { getOrganisation } from '../../reducers/organisation'
@@ -41,6 +42,13 @@ class OrganisationComponent extends React.Component {
           ? (
             <div>
               <h5>{organisation.name}</h5>
+              <div className='col-sm-2'>
+                <CopyToClipboard
+                  text={this.getUrl(organisation.id)}
+                  onCopy={() => this.setState({copied: true})}>
+                  <button className='btn btn-info'>Get Link</button>
+                </CopyToClipboard>
+              </div>
               <div className='card'>
                 <span className='card-header'><h4>Files</h4></span>
                 <FileList
