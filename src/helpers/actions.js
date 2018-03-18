@@ -9,3 +9,6 @@ export const SET_FILE = 'SET_FILE'
 // organisations
 export const SET_ORGANISATION = 'SET_ORGANISATION'
 export const SET_ORGANISATION_FILES = 'SET_ORGANISATION_FILES'
+
+// public
+export const SET_PUBLIC_FILE = 'SET_PUBLIC_FILE'

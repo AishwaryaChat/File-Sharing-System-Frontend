@@ -1,7 +1,8 @@
 import React from 'react'
 import {
   BrowserRouter as Router,
-  Switch
+  Switch,
+  Route
 } from 'react-router-dom'
 import { Provider } from 'react-redux'
 
@@ -12,6 +13,7 @@ import Organisation from './organisation'
 import CreateOrganisation from './organisation/createOrganisation'
 import AddFile from './file/addFile'
 import ShowFile from './file/showFile'
+import ShowPublicFile from './showFile'
 
 const AppRouter = ({ store }) => (
   <Provider store={store}>
@@ -24,6 +26,7 @@ const AppRouter = ({ store }) => (
         <PrivateLayout exact path='/createorganisation' component={CreateOrganisation} />
         <PrivateLayout exact path='/addfile' component={AddFile} />
         <PrivateLayout exact path='/showfile' component={ShowFile} />
+        <Route exact path='/file/:fileId/user/:userId' component={ShowPublicFile} />
       </Switch>
     </Router>
   </Provider>

@@ -21,7 +21,8 @@ const configureStore = () => {
       saveState({
         accounts: store.getState().accounts,
         file: store.getState().file,
-        organisation: store.getState().organisation
+        organisation: store.getState().organisation,
+        publicReducer: store.getState().publicReducer
       })
     }, 1000)
   )

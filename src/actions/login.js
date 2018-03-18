@@ -24,20 +24,17 @@ const postLogin = ({email, password}) => {
 
 export const startPostLogin = data => dispatch => {
   return postLogin(data)
-  .then(checkStatus)
-  .then(parseJSON)
-  .then(json => {
-    console.log('data inside login', json)
-    dispatch(
-      emitLogin({
-        email: data.email,
-        id: json.id
-      })
-    )
-  })
-  .catch(err => {
-    console.error(err)
-  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .then(json => {
+      console.log('data inside login', json)
+      dispatch(
+        emitLogin(json)
+      )
+    })
+    .catch(err => {
+      console.error(err)
+    })
 }
 
 const logout = ({ jwt }) => {

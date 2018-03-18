@@ -2,10 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import {CopyToClipboard} from 'react-copy-to-clipboard'
 
 // selectors
 import { getById, getAllIds } from '../../reducers/file'
-import { getJwt} from '../../reducers/accounts'
+import { getJwt, getUserId } from '../../reducers/accounts'
 
 // actions
 import { emitFile } from '../../actions/file'
@@ -14,7 +15,8 @@ import { startAddFile } from '../../actions/organisation'
 const mapStateToProps = state => ({
   filesById: getById(state),
   filesAllIds: getAllIds(state),
-  jwt: getJwt(state)
+  jwt: getJwt(state),
+  userId: getUserId(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -31,7 +33,8 @@ class FileListComponent extends React.Component {
     filesById: PropTypes.object.isRequired,
     filesAllIds: PropTypes.array.isRequired,
     setFile: PropTypes.func.isRequired,
-    jwt: PropTypes.string.isRequired
+    jwt: PropTypes.string.isRequired,
+    userId: PropTypes.string.isRequired
   }
 
   handleClick = (e) => {
@@ -55,6 +58,12 @@ class FileListComponent extends React.Component {
     }
   }
 
+  getUrl = id => {
+    const { userId } = this.props
+    return `localhost:3001/file/${id}/user/${userId}`
+    // `${process.env.REACT_APP_SERVER}/api/PublicModels/getfile/${id}/user/${userId}`
+  }
+
   render () {
     const { filesById, filesAllIds } = this.props
     return (
@@ -63,7 +72,11 @@ class FileListComponent extends React.Component {
           <div className='row card-header' key={index}>
             <div className='col-sm-7 card-text' onClick={this.handleClick} id={id}>{filesById[id].name}</div>
             <div className='col-sm-2'>
-              <button className='btn btn-info'>Get Link</button>
+              <CopyToClipboard
+                text={this.getUrl(id)}
+                onCopy={() => this.setState({copied: true})}>
+                <button className='btn btn-info'>Get Link</button>
+              </CopyToClipboard>
             </div>
             <div className='col-sm-2'>
               <button
