@@ -40,14 +40,19 @@ class FileListComponent extends React.Component {
     const { filesById, organisation } = this.props
     return (
       <div className='card-body'>
-        {organisation.files.map((id, index) => (
-          <div className='row card-header' key={index}>
-            <div className='col-sm-7 card-text' onClick={this.handleClick} id={id}>{filesById[id].name}</div>
-            <div className='col-sm-2'>
-              <button className='btn btn-info'>Get Link</button>
-            </div>
-          </div>
-        ))}
+        {organisation.files.map((id, index) => {
+          if (filesById[id]) {
+            return (
+              <div className='row card-header' key={index}>
+                <div className='col-sm-7 card-text' onClick={this.handleClick} id={id}>{filesById[id].name}</div>
+                <div className='col-sm-2'>
+                  <button className='btn btn-info'>Get Link</button>
+                </div>
+              </div>
+            )
+          }
+          return null
+        })}
       </div>
     )
   }
